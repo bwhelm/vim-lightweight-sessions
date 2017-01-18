@@ -4,25 +4,17 @@
 "  g:vim_lws_directories contains a dictionary of
 "  directories/files to be opened. Note that directory paths should not be
 "  escaped.
-if !exists('g:vim_lws_directories')
-	let g:vim_lws_directories = {}
-endif
+let g:vim_lws_directories = get(g:, 'vim_lws_directories', {})
 
 " Prefix to use for opening sessions
-if !exists('g:vim_lws_prefix')
-	let g:vim_lws_prefix = '<Leader>s'
-endif
+let g:vim_lws_prefix = get(g:, 'vim_lws_prefix', '<Leader>s')
 
 " Mapping to use (with prefix) for opening list of defined sessions
-if !exists('g:vim_lws_list')
-	let g:vim_lws_list = 'l'
-endif
+let g:vim_lws_list = get(g:, 'vim_lws_list', 'l')
 
 " Ordered string of characters to use for activating item in session list
 " (via OpenSessionList).
-if !exists('g:lws_open_string')
-	let g:lws_open_string = '123456789abcdefghijklmnopqrstuvwxyz'
-endif
+let g:lws_open_string = get(g:, 'lws_open_string', '123456789abcdefghijklmnopqrstuvwxyz')
 
 " ==========
 " Initialize
