@@ -14,13 +14,14 @@ let g:vim_lws_list = get(g:, 'vim_lws_list', 'l')
 
 " Ordered string of characters to use for activating item in session list
 " (via OpenSessionList).
-let g:lws_open_string = get(g:, 'lws_open_string', '123456789abcdefghijklmnopqrstuvwxyz')
+let g:lws_open_string = get(g:, 'lws_open_string',
+			\ '123456789abcdefghijklmnopqrstuvwxyz')
 
 " ==========
 " Initialize
 " ==========
 " Define command and mapping for session list
-command! OpenSessionList call lightweightsessions#OpenSessionList()
-execute 'nnoremap ' . g:vim_lws_prefix . g:vim_lws_list . ' :OpenSessionList<CR>'
+execute 'nnoremap' g:vim_lws_prefix . g:vim_lws_list
+			\ ':call lightweightsessions#OpenSessionList()<CR>'
 " Create keymappings for all defined files/directories
 call lightweightsessions#CreateKeymaps()
