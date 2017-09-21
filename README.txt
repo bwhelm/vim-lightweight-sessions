@@ -4,8 +4,8 @@ This plugin allows for easy opening of pre-defined files or directories.
 
 CONTENTS                                       *lightweight-sessions-contents*
 
-	1. Using Lightweight Sessions ............... |lightweight-sessions-using|
-	2. Configuring Lightweight Sessions ... |lightweight-sessions-configuring|
+    1. Using Lightweight Sessions ............... |lightweight-sessions-using|
+    2. Configuring Lightweight Sessions ... |lightweight-sessions-configuring|
 
 
 USING LIGHTWEIGHT-SESSIONS                        *lightweight-sessions-using*
@@ -24,7 +24,7 @@ open. The dictionary key determines the keys to enter following the lightweight
 sessions prefix to open the corresponding value. Values are specified as paths
 to files or directories; they need not be escaped. For example:
 
-	let g:vim_lws_directories={"d": "~/Documents"}
+    let g:vim_lws_directories={"d": "~/Documents"}
 
 will allow hitting "<Leader>sd" to view the ~/Documents directory in netrw.
 
