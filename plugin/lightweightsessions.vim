@@ -1,6 +1,6 @@
-" ================
+" ----------------------------------------------------------------------------
 " Default settings
-" ================
+" ----------------------------------------------------------------------------
 "  g:vim_lws_directories contains a dictionary of
 "  directories/files to be opened. Note that directory paths should not be
 "  escaped.
@@ -15,11 +15,11 @@ let g:vim_lws_list = get(g:, 'vim_lws_list', 'l')
 " Ordered string of characters to use for activating item in session list
 " (via OpenSessionList).
 let g:lws_open_string = get(g:, 'lws_open_string',
-            \ '123456789abcdefghijklmnopqrstuvwxyz')
+            \ '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
-" ==========
+" ----------------------------------------------------------------------------
 " Initialize
-" ==========
+" ----------------------------------------------------------------------------
 " Define command and mapping for session list
 execute 'nnoremap' g:vim_lws_prefix . g:vim_lws_list
             \ ':call lightweightsessions#OpenSessionList()<CR>'
