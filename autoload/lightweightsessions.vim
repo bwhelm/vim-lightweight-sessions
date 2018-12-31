@@ -18,7 +18,7 @@ function! lightweightsessions#CreateKeymaps() abort
             " the directory.
             execute 'nnoremap <silent>' g:vim_lws_prefix . l:key ':Explore' fnameescape(l:fileOrDir) . '<CR>'
         else  " Accessing local directory: change directory first.
-            execute 'nnoremap <silent>' g:vim_lws_prefix . l:key ':cd' fnameescape(l:fileOrDir) . '\| Explore<CR>'
+            execute 'nnoremap <silent>' g:vim_lws_prefix . l:key ':cd' fnameescape(l:fileOrDir) . '\| Explore' fnameescape(l:fileOrDir) . '<CR>'
         endif
     endfor
 endfunction
@@ -41,9 +41,9 @@ function! lightweightsessions#OpenSessionList() abort
         let l:fileOrDir = fnamemodify(g:vim_lws_directories[l:key], ':p')
         if !empty(findfile(l:fileOrDir))
             let l:directory = fnamemodify(l:fileOrDir, ':h')
-            execute 'edit' fnameescape(l:fileOrDir) '| cd' fnameescape(l:directory)
+            execute 'cd' fnameescape(l:directory) '| edit' fnameescape(l:fileOrDir)
         else
-            execute 'cd' fnameescape(l:fileOrDir) '| Explore'
+            execute 'cd' fnameescape(l:fileOrDir) '| Explore' fnameescape(l:fileOrDir)
         endif
     else   " l:answer not a key of l:indexDictionary.
         echohl WarningMsg
