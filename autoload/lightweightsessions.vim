@@ -1,8 +1,10 @@
+scriptencoding utf-8
+" vim: set fdm=marker:
 " ============================================================================
 " Lightweight Sessions
 " ============================================================================
 
-function! lightweightsessions#CreateKeymaps() abort
+function! lightweightsessions#CreateKeymaps() abort  "{{{
     for l:key in keys(g:vim_lws_directories)
         let l:fileOrDir = fnamemodify(g:vim_lws_directories[l:key], ':p')
         if filereadable(l:fileOrDir)  " Accessing local file. Find dir and cd
@@ -22,8 +24,8 @@ function! lightweightsessions#CreateKeymaps() abort
         endif
     endfor
 endfunction
-
-function! lightweightsessions#OpenSessionList() abort
+"}}}
+function! lightweightsessions#OpenSessionList() abort  "{{{
     let l:indexString=g:lws_open_string
     let l:index = 0
     let l:indexDictionary = {}
@@ -51,3 +53,4 @@ function! lightweightsessions#OpenSessionList() abort
         echohl None
     endif
 endfunction
+"}}}
