@@ -18,20 +18,20 @@ CONFIGURING LIGHTWEIGHT-SESSIONS            *lightweight-sessions-configuring*
 
 The following variables can be configured (with defaults given):
 
-|g:vim_lws_directories|={}                             *g:vim_lws_directories*
+|g:lws_directories|={}                             *g:lws_directories*
 This is the dictionary of directories/files that lightweight sessions will
 open. The dictionary key determines the keys to enter following the lightweight
 sessions prefix to open the corresponding value. Values are specified as paths
 to files or directories; they need not be escaped. For example:
 
-    let g:vim_lws_directories={"d": "~/Documents"}
+    let g:lws_directories={"d": "~/Documents"}
 
 will allow hitting "<Leader>sd" to view the ~/Documents directory in netrw.
 
-|g:vim_lws_prefix|="<Leader>s"                              *g:vim_lws_prefix*
+|g:lws_prefix|="<Leader>s"                              *g:lws_prefix*
 This specifies the prefix to type before typing the relevant dictionary key.
 
-|g:vim_lws_list|="l"                                          *g:vim_lws_open*
+|g:lws_list|="l"                                          *g:lws_open*
 This specifies the key to use with the prefix to present a list of defined
 key-file/directory pairs. You can then select one to open.
 
