@@ -72,6 +72,7 @@ function! s:getFileSuffix(delete) abort  " {{{
     echohl None
     return l:fileSuffix
 endfunction
+"}}}
 function! lightweightsessions#createSession(...) abort  "{{{
     " This saves a session file to ~/.vim/mysession-X, where X is the count.
     if v:count == 0  " No count given: ask for name
@@ -101,12 +102,12 @@ function! lightweightsessions#createSession(...) abort  "{{{
     let l:contents = readfile(l:file)
     " Remove unwanted entries in session.
     let l:contents = filter(l:contents, 'v:val !~# "^setlocal"')
-    " let l:contents[1] = '%bwipeout'  " this replaces `set nocp` line
+    call insert(l:contents, '%bwipeout', 1)
     call writefile(l:contents, l:file)
     redraw | echo 'Session' l:fileSuffix 'saved.'
     let g:lws_last_session = l:fileSuffix
 endfunction
-"2}}}
+"}}}
 function! lightweightsessions#loadSession(count, delete) abort  "{{{
     " This loads a session file from ~/.vim/mysession, and then optionally
     " deletes it.
@@ -142,7 +143,7 @@ function! lightweightsessions#loadSession(count, delete) abort  "{{{
     endif
     let g:lws_last_session = l:fileSuffix
 endfunction
-"2}}}
+"}}}
 function! lightweightsessions#chooseSessions(delete) abort  "{{{
     " Display list of session files, ask for one to be picked.
     let fileList = glob(g:myVimDir . '/mysession-*', 0, 1)
@@ -163,6 +164,7 @@ function! lightweightsessions#chooseSessions(delete) abort  "{{{
         echo 'Enter number of session: '
     endif
     let l:number = nr2char(getchar())
+    redraw
     if l:number =~ '\d' && l:number > 0 && l:number <= len(fileList)
         let l:fileSuffix = fnamemodify(fileList[l:number - 1], ':t')[10:-5]
         call lightweightsessions#loadSession(l:fileSuffix, a:delete)
@@ -170,4 +172,4 @@ function! lightweightsessions#chooseSessions(delete) abort  "{{{
         redraw | echo "Aborting...."
     endif
 endfunction
-"2}}}
+"}}}
