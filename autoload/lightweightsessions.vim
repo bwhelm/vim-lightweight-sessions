@@ -8,19 +8,19 @@ function! lightweightsessions#CreateKeymaps() abort  "{{{
     for l:key in keys(g:lws_directories)
         let l:fileOrDir = fnamemodify(g:lws_directories[l:key], ':p')
         if filereadable(l:fileOrDir)  " Accessing local file. Find dir and cd
-            if l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
-                " Accessing file on remote server; simply open it.
-                execute 'nnoremap <silent>' g:lws_prefix . l:key 'edit' fnameescape(l:fileOrDir) . '<CR>'
-            else  " Accessing local file. cd to parent directory and open the file.
+            " if l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
+            "     " Accessing file on remote server; simply open it.
+            "     execute 'nnoremap <silent>' g:lws_prefix . l:key 'edit' fnameescape(l:fileOrDir) . '<CR>'
+            " else  " Accessing local file. cd to parent directory and open the file.
                 let l:directory = fnamemodify(l:fileOrDir, ':h')
-                execute 'nnoremap <silent>' g:lws_prefix . l:key ':cd' fnameescape(l:directory) . '\| edit' fnameescape(l:fileOrDir) . '<CR>'
-            endif
-        elseif l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
-            " Here we're accessing a remote server and don't want to change
-            " the directory.
-            execute 'nnoremap <silent>' g:lws_prefix . l:key ':Explore' fnameescape(l:fileOrDir) . '<CR>'
+                execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:directory) . '\| edit' fnameescape(l:fileOrDir) . '<CR>'
+            " endif
+        " elseif l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
+        "     " Here we're accessing a remote server and don't want to change
+        "     " the directory.
+        "     execute 'nnoremap <silent>' g:lws_prefix . l:key ':Explore' fnameescape(l:fileOrDir) . '<CR>'
         else  " Accessing local directory: change directory first.
-            execute 'nnoremap <silent>' g:lws_prefix . l:key ':cd' fnameescape(l:fileOrDir) . '\| Explore' fnameescape(l:fileOrDir) . '<CR>'
+            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:fileOrDir) . '\| Explore' fnameescape(l:fileOrDir) . '<CR>'
         endif
     endfor
 endfunction
