@@ -55,3 +55,7 @@ key-file/directory pairs. You can then select one to open.
 |g:lws-open-string|="123456789abcdefghijklmnopqrstuvwxyz"  *g:lws-open-string*
 This specifies the string of characters to use for activating item in session
 list.
+
+|g:lws_fileCommand|="Explore"                           *g:lws_fileCommand*
+This specifies the command used to open file/directory specified in a session.
+By default, it uses netrw's Explore command.
