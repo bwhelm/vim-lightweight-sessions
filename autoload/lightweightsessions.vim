@@ -18,9 +18,9 @@ function! lightweightsessions#CreateKeymaps() abort  "{{{
         " elseif l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
         "     " Here we're accessing a remote server and don't want to change
         "     " the directory.
-        "     execute 'nnoremap <silent>' g:lws_prefix . l:key ':Explore' fnameescape(l:fileOrDir) . '<CR>'
+        "     execute 'nnoremap <silent>' g:lws_prefix . l:key ':' . g:lws_fileCommand . ' ' . fnameescape(l:fileOrDir) . '<CR>'
         else  " Accessing local directory: change directory first.
-            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:fileOrDir) . '\| Explore' fnameescape(l:fileOrDir) . '<CR>'
+            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:fileOrDir) . '\|' g:lws_fileCommand fnameescape(l:fileOrDir) . '<CR>'
         endif
     endfor
 endfunction
@@ -45,7 +45,7 @@ function! lightweightsessions#OpenSessionList() abort  "{{{
             let l:directory = fnamemodify(l:fileOrDir, ':h')
             execute 'cd' fnameescape(l:directory) '| edit' fnameescape(l:fileOrDir)
         else
-            execute 'cd' fnameescape(l:fileOrDir) '| Explore' fnameescape(l:fileOrDir)
+            execute 'cd' fnameescape(l:fileOrDir) '|' g:lws_fileCommand fnameescape(l:fileOrDir)
         endif
     else   " l:answer not a key of l:indexDictionary.
         echohl WarningMsg

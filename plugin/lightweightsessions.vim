@@ -17,6 +17,9 @@ let g:lws_list = get(g:, 'lws_list', 'l')
 let g:lws_open_string = get(g:, 'lws_open_string',
             \ '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
+" Command used to open items in session list. By default use netrw.
+let g:lws_fileCommand = get(g:, 'lws_fileCommand', 'Explore')
+
 " ----------------------------------------------------------------------------
 " Initialize
 " ----------------------------------------------------------------------------
