@@ -7,20 +7,30 @@ scriptencoding utf-8
 function! lightweightsessions#CreateKeymaps() abort  "{{{
     for l:key in keys(g:lws_directories)
         let l:fileOrDir = fnamemodify(g:lws_directories[l:key], ':p')
+        let l:directory = fnamemodify(l:fileOrDir, ':h')
+        if l:directory =~ "^scp:"
+            let l:cdDir = l:directory
+        else
+            let l:cdDir = finddir('.git', l:directory . ';')
+            if l:cdDir == ''
+                let l:cdDir = fnamemodify(l:directory, ":p:h")
+            else
+                let l:cdDir = fnamemodify(l:cdDir, ":p:h:h")
+            endif
+        endif
         if filereadable(l:fileOrDir)  " Accessing local file. Find dir and cd
             " if l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
             "     " Accessing file on remote server; simply open it.
             "     execute 'nnoremap <silent>' g:lws_prefix . l:key 'edit' fnameescape(l:fileOrDir) . '<CR>'
             " else  " Accessing local file. cd to parent directory and open the file.
-                let l:directory = fnamemodify(l:fileOrDir, ':h')
-                execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:directory) . '\| edit' fnameescape(l:fileOrDir) . '<CR>'
+            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(cdDir) '\| edit' fnameescape(l:fileOrDir) . '<CR>'
             " endif
         " elseif l:fileOrDir =~? '^\[dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\]://'
         "     " Here we're accessing a remote server and don't want to change
         "     " the directory.
         "     execute 'nnoremap <silent>' g:lws_prefix . l:key ':' . g:lws_fileCommand . ' ' . fnameescape(l:fileOrDir) . '<CR>'
         else  " Accessing local directory: change directory first.
-            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:fileOrDir) . '\|' g:lws_fileCommand fnameescape(l:fileOrDir) . '<CR>'
+            execute 'nnoremap <silent>' g:lws_prefix . l:key ':lcd' fnameescape(l:cdDir) '\|' g:lws_fileCommand fnameescape(l:fileOrDir) . '<CR>'
         endif
     endfor
 endfunction
