@@ -85,8 +85,10 @@ endfunction
 "}}}
 function! lightweightsessions#createSession(...) abort  "{{{
     " This saves a session file to ~/.vim/mysession-X, where X is the count.
+    " Possible parameters: ("fileSuffix", 1), where a:2 is 1 if should
+    " automatically overwrite
     if v:count == 0  " No count given: ask for name
-        if a:0 == 1
+        if a:0 >= 1
             let l:fileSuffix = a:1
         else
             let l:fileSuffix = <SID>getFileSuffix('')
@@ -98,8 +100,10 @@ function! lightweightsessions#createSession(...) abort  "{{{
     else             " Count given, append that to filename
         let l:fileSuffix = v:count
     endif
+    " Set overwrite if second optional parameter is given
+    let l:overwrite = a:0 == 2 && a:2 == 1 ? 1 : 0
     let l:file = g:myVimDir . '/mysession-' . l:fileSuffix . '.vim'
-    if filereadable(l:file)
+    if !l:overwrite && filereadable(l:file)
         echohl WarningMsg
         redraw | echo 'Sessions file "' . l:fileSuffix . '" exists; overwrite [y/N]?'
         echohl None
